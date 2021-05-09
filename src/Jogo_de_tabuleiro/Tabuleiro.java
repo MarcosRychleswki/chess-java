@@ -43,6 +43,10 @@ public class Tabuleiro {
 		return peças[posicao.getRow()][posicao.getColumn()];
 	}
 	
+	public void lugarPeça(Peça peça, Posicao posicao) {
+		peças[posicao.getRow()][posicao.getColumn()] = peça;
+		peça.posicao = posicao;
+	}
 	
 
 }
