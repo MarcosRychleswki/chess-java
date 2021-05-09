@@ -4,13 +4,13 @@ public class Tabuleiro {
 	
 	private int rows;
 	private int columns;
-	private Peça[][] peça;
+	private Peça[][] peças;
 	
 	
 	public Tabuleiro(int rows, int columns) {
 		this.rows = rows;
 		this.columns = columns;
-		peça = new Peça[rows][columns];
+		peças = new Peça[rows][columns];
 	}
 
 
@@ -33,7 +33,15 @@ public class Tabuleiro {
 		this.columns = columns;
 	}
 	
+	// metodo para retornar uma peça dada a uma linha e coluna
+	public Peça peça(int row, int column) {
+		return peças[row][column];
+	}
 	
+	// sobrecarga do metodo, retornar a peça pela posiçao
+	public Peça peça(Posicao posicao) {
+		return peças[posicao.getRow()][posicao.getColumn()];
+	}
 	
 	
 
