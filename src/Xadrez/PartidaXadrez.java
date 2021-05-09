@@ -26,10 +26,15 @@ public class PartidaXadrez {
 		return mat;
 	}
 	
+	// metodo para receber as coordenadas do xadrez
+	private void colocarNovaPeça(char column, int row, PeçaXadrez peça) {
+		tabuleiro.lugarPeça(peça, new PosicaoXadrez(column, row).toPosicao());
+	}
+	
 	private void inicioPartida() {
-		tabuleiro.lugarPeça(new Torre(tabuleiro, Cor.WHITE), new Posicao(2, 1));
-		tabuleiro.lugarPeça(new Rei(tabuleiro, Cor.BLACK), new Posicao(0, 4));
-		tabuleiro.lugarPeça(new Rei(tabuleiro, Cor.WHITE), new Posicao(7, 4));
+		colocarNovaPeça('b', 6, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeça('e', 8,new Rei(tabuleiro, Cor.BLACK));
+		colocarNovaPeça('e', 1,new Rei(tabuleiro, Cor.WHITE));
 	}
 
 }
