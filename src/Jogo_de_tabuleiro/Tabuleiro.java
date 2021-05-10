@@ -52,6 +52,19 @@ public class Tabuleiro {
 		peça.posicao = posicao;
 	}
 	
+	public Peça removerPeça(Posicao posicao) {
+		if (!posicaoExiste(posicao)) {
+			throw new TabuleiroException("A posição não está no tabuleiro");
+		}
+		if (peça(posicao) == null) {
+			return null;
+		}
+		Peça aux = peça(posicao);
+		aux.posicao = null;
+		peças[posicao.getRow()][posicao.getColumn()] = null;
+		return aux;
+	}
+	
 	private boolean posicaoExiste(int row, int column) {
 		return row >=0 && row < rows && column >= 0 && column < columns;
 	}
@@ -66,5 +79,6 @@ public class Tabuleiro {
 		}
 		return peça(posicao) != null;
 	}
+	
 
 }

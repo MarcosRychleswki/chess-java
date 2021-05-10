@@ -1,7 +1,11 @@
 package Aplicacao;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import Xadrez.Cor;
 import Xadrez.PeçaXadrez;
+import Xadrez.PosicaoXadrez;
 
 public class Front {
 	
@@ -9,9 +13,17 @@ public class Front {
 	
 
 	
-	
-	
-	
+	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new PosicaoXadrez(column, row);
+		}
+		catch (RuntimeException e) {
+			throw new InputMismatchException("erro lendo posicao do xadres, valores validos de a1 ate h8");
+		}
+	}
 	
 	public static void printTabuleiro(PeçaXadrez[][] peças) {
 		for (int i=0; i<peças.length; i++) {
