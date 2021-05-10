@@ -9,9 +9,11 @@ import Xadrez.PosicaoXadrez;
 
 public class Front {
 	
+	// metodo gambiarra linda
+	public static void clearScreen() { 
+		for (int i = 0; i < 50; ++i) System.out.println ();
+		} 
 	
-	
-
 	
 	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
 		try {
@@ -21,7 +23,8 @@ public class Front {
 			return new PosicaoXadrez(column, row);
 		}
 		catch (RuntimeException e) {
-			throw new InputMismatchException("erro lendo posicao do xadres, valores validos de a1 ate h8");
+			throw new InputMismatchException("erro lendo posicao do xadres, valores validos de a1 ate "
+					+ "h8, aperte enter para continuar");
 		}
 	}
 	
