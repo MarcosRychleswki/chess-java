@@ -1,9 +1,10 @@
 package Xadrez;
 
 import Jogo_de_tabuleiro.Peça;
+import Jogo_de_tabuleiro.Posicao;
 import Jogo_de_tabuleiro.Tabuleiro;
 
-public class PeçaXadrez extends Peça {
+public abstract class PeçaXadrez extends Peça {
 	
 	private Cor cor;
 
@@ -16,6 +17,10 @@ public class PeçaXadrez extends Peça {
 		return cor;
 	}
 
+	protected boolean peçaOponente(Posicao posicao) {
+		PeçaXadrez p = (PeçaXadrez)getTabuleiro().peça(posicao);
+        return p != null && p.getCor() != cor;
+    }
 
 
 }

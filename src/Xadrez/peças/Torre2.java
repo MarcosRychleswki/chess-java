@@ -5,15 +5,15 @@ import Jogo_de_tabuleiro.Tabuleiro;
 import Xadrez.Cor;
 import Xadrez.PeçaXadrez;
 
-public class Torre extends PeçaXadrez{
+public class Torre2 extends PeçaXadrez{
 
-	public Torre(Tabuleiro tabuleiro, Cor cor) {
+	public Torre2(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro, cor);
 	}
 
 	@Override
 	public String toString() {
-		return "T";
+		return "t";
 	}
 	
 	@Override

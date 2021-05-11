@@ -4,7 +4,9 @@ import Jogo_de_tabuleiro.Peça;
 import Jogo_de_tabuleiro.Posicao;
 import Jogo_de_tabuleiro.Tabuleiro;
 import Xadrez.peças.Rei;
+import Xadrez.peças.Rei2;
 import Xadrez.peças.Torre;
+import Xadrez.peças.Torre2;
 
 public class PartidaXadrez {
 
@@ -32,6 +34,7 @@ public class PartidaXadrez {
 		Posicao origem = posicaoOrigem.toPosicao();
 		Posicao destino = posicaoDestino.toPosicao();
 		validarPosicaoOrigem(origem);
+		validarPosicaoDestino(origem, destino);
 		Peça capturarPeça = mover(origem, destino);
 		return (PeçaXadrez)capturarPeça;
 	}
@@ -47,8 +50,16 @@ public class PartidaXadrez {
 		if (!tabuleiro.temPeça(posicao)) {
 			throw new ExceptionXadrez("Nao tem peça na posicao");
 		}
+		if (!tabuleiro.peça(posicao).eQMP()) {
+			throw new ExceptionXadrez("nao existe movimentos possiveis para a peça, aperte enter");
+		}
 	}
 	
+	private void validarPosicaoDestino(Posicao origem, Posicao destino) {
+		if (!tabuleiro.peça(origem).movimentoPossivel(destino)) {
+			throw new ExceptionXadrez("Peça escolhida nao pode se mover para a posicao de destino");
+		}
+	}
 	
 	
 	
@@ -60,7 +71,8 @@ public class PartidaXadrez {
 	private void inicioPartida() {
 		colocarNovaPeça('a', 8, new Torre(tabuleiro, Cor.WHITE));
 		colocarNovaPeça('h', 8, new Rei(tabuleiro, Cor.BLACK));
-		
+		colocarNovaPeça('h', 4, new Rei2(tabuleiro, Cor.BLACK));
+		colocarNovaPeça('c', 8, new Torre2(tabuleiro, Cor.WHITE));
 	}
 
 	

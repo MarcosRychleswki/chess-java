@@ -4,15 +4,15 @@ import Jogo_de_tabuleiro.Tabuleiro;
 import Xadrez.Cor;
 import Xadrez.PeçaXadrez;
 
-public class Rei extends PeçaXadrez{
+public class Rei2 extends PeçaXadrez{
 	
-	public Rei(Tabuleiro tabuleiro, Cor cor) {
+	public Rei2(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro, cor);
 	}
 
 	@Override
 	public String toString() {
-		return "R";
+		return "r";
 	}
 	
 	@Override

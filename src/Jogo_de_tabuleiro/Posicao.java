@@ -36,6 +36,11 @@ public class Posicao {
 		this.column = column;
 	}
 
+	
+	public void setValores(int row, int column) {
+		this.column = column;
+		this.row = row;
+	}
 
 
 	@Override
