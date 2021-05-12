@@ -10,11 +10,23 @@ import Xadrez.peças.Torre2;
 
 public class PartidaXadrez {
 
+	private int turno;
+	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
 
 	public PartidaXadrez() {
 		tabuleiro = new Tabuleiro(8, 8);
+		turno = 1;
+		jogadorAtual = Cor.WHITE;
 		inicioPartida();
+	}
+	
+	public int getTurno() {
+		return turno;
+	}
+	
+	public Cor getJogadorAtual() {
+		return jogadorAtual;
 	}
 
 	public PeçaXadrez[][] getPeças() {
@@ -30,12 +42,21 @@ public class PartidaXadrez {
 	}
 	
 	
+	public boolean[][] movimentosPossiveis(PosicaoXadrez posicaoOrigem){
+		Posicao posicao = posicaoOrigem.toPosicao();
+		validarPosicaoOrigem(posicao);
+		return tabuleiro.peça(posicao).movimentosPossiveis();
+	}
+	
+	
+	
 	public PeçaXadrez movimentoXadrez(PosicaoXadrez posicaoOrigem, PosicaoXadrez posicaoDestino ) {
 		Posicao origem = posicaoOrigem.toPosicao();
 		Posicao destino = posicaoDestino.toPosicao();
 		validarPosicaoOrigem(origem);
 		validarPosicaoDestino(origem, destino);
 		Peça capturarPeça = mover(origem, destino);
+		proximoTurno();
 		return (PeçaXadrez)capturarPeça;
 	}
 	
@@ -50,6 +71,9 @@ public class PartidaXadrez {
 		if (!tabuleiro.temPeça(posicao)) {
 			throw new ExceptionXadrez("Nao tem peça na posicao");
 		}
+		if (jogadorAtual != ((PeçaXadrez)tabuleiro.peça(posicao)).getCor()) {
+			throw new ExceptionXadrez("Essa peça nao e sua");
+		}
 		if (!tabuleiro.peça(posicao).eQMP()) {
 			throw new ExceptionXadrez("nao existe movimentos possiveis para a peça, aperte enter");
 		}
@@ -61,18 +85,32 @@ public class PartidaXadrez {
 		}
 	}
 	
+	// troca de turno
+	private void proximoTurno() {
+		turno++;
+		jogadorAtual = (jogadorAtual == Cor.WHITE) ? Cor.BLACK : Cor.WHITE;
+	}
+	
+	
+	
+	
 	
 	
 	// metodo para receber as coordenadas do xadrez
 	private void colocarNovaPeça(char column, int row, PeçaXadrez peça) {
 		tabuleiro.lugarPeça(peça, new PosicaoXadrez(column, row).toPosicao());
 	}
-	;
+	
 	private void inicioPartida() {
-		colocarNovaPeça('a', 8, new Torre(tabuleiro, Cor.WHITE));
-		colocarNovaPeça('h', 8, new Rei(tabuleiro, Cor.BLACK));
-		colocarNovaPeça('h', 4, new Rei2(tabuleiro, Cor.BLACK));
-		colocarNovaPeça('c', 8, new Torre2(tabuleiro, Cor.WHITE));
+		colocarNovaPeça('b', 8, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeça('e', 7, new Rei(tabuleiro, Cor.WHITE));
+		colocarNovaPeça('d', 8, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeça('c', 6, new Rei(tabuleiro, Cor.WHITE));
+		
+		colocarNovaPeça('b', 1, new Rei2(tabuleiro, Cor.BLACK));
+		colocarNovaPeça('d', 1, new Torre2(tabuleiro, Cor.BLACK));
+		colocarNovaPeça('e', 2, new Rei2(tabuleiro, Cor.BLACK));
+		colocarNovaPeça('g', 3, new Torre2(tabuleiro, Cor.BLACK));
 	}
 
 	
